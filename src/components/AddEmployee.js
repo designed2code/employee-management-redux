@@ -24,16 +24,6 @@ const AddEmployee = () => {
     const submitHandler = (e) => {
         // Prevent Default Submission
         e.preventDefault()
-        // Check Email and Phone Number Pattern 
-            const reEmail = /^\S+@\S+$/
-            const rePhone = /^[6-9]\d{9}$/
-            if(!reEmail.test(String(email).toLowerCase())){
-                return toast.warning("Invalid EMail")
-            }
-            else if(!rePhone.test(Number(phoneNumber))){
-                return toast.warning("Invalid Number")
-            }
-        
         // Check if the email and Phone Number already exits
         const checkEmail = employees.find(employee => employee.email === email && employee)
         const checkNumber = employees.find(employee => employee.phoneNumber === parseInt(phoneNumber))
@@ -48,6 +38,17 @@ const AddEmployee = () => {
         if(checkNumber){
             return toast.error("Number already exits")
         }
+        // Check Email and Phone Number Pattern 
+            const reEmail = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/
+            const rePhone = /^[6-9]\d{9}$/
+            if(!reEmail.test(String(email).toLowerCase())){
+                return toast.warning("Invalid EMail")
+            }
+            else if(!rePhone.test(Number(phoneNumber))){
+                return toast.warning("Invalid Number")
+            }
+        
+        
 
         // To get the new id after adding the employee
         const data = {
